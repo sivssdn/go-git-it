@@ -18,7 +18,7 @@ func main() {
 		fmt.Println(`Please enter command after [program name]. \nE.g., program_name command_name`)
 		return
 	}
-	fmt.Println(commandLineArgs)
-	AutoComplete("Hi branches!")
 	
+	branch := AutoCompleteBranchName(commandLineArgs[0])
+	fmt.Println(branch);
 }

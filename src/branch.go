@@ -1,17 +1,27 @@
 package main
 
 import (
-	"fmt"
 	"os/exec"
+	"strings"
 )
 
-func AutoComplete(name string){
-	fmt.Println(name)
+/*
+	Accepts [string] substring of name of any branch
+	Returns [string] first matching branch name that contains the input branch name
+*/
+func AutoCompleteBranchName(name string) string {
 	command := exec.Command("git", "branch")
-	branches, err := command.Output()
+	commandOutput, err := command.Output()
 
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(branches))
+	branchesArray := strings.Split(string(commandOutput), " ")
+	for i := 1; i < len(branchesArray); i += 2 {
+		if (strings.Contains(branchesArray[i], name)){
+				return branchesArray[i]
+			}
+	}
+
+	return "Branch Not Found";
 }
