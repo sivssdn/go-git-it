@@ -10,7 +10,7 @@ import (
 	Returns [string] first matching branch name that contains the input branch name
 */
 func AutoCompleteBranchName(name string) string {
-	command := exec.Command("git", "branch")
+	command := exec.Command("git", "branch", "-a")
 	commandOutput, err := command.Output()
 
 	if err != nil {
@@ -18,10 +18,10 @@ func AutoCompleteBranchName(name string) string {
 	}
 	branchesArray := strings.Split(string(commandOutput), " ")
 	for i := 1; i < len(branchesArray); i += 2 {
-		if (strings.Contains(branchesArray[i], name)){
-				return branchesArray[i]
-			}
+		if strings.Contains(branchesArray[i], name) {
+			return branchesArray[i]
+		}
 	}
 
-	return "Branch Not Found";
+	return "Branch Not Found"
 }
