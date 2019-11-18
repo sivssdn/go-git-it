@@ -35,20 +35,26 @@ func Checkout(branchIdentifier string) {
 	fmt.Println("Stashing current branch")
 	execCmd("stash")
 	fmt.Println("Checking out to branch : ", branchName)
-	execCmd("checkout", branchName)
+	execCmd("Couldn't execute git checkout", "checkout", branchName)
 }
 
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
 func Push() {
 	fmt.Println("Updating current branch on remote.")
-	execCmd("push", "origin", "HEAD")
+	execCmd("Couldn't execute git push", "push", "origin", "HEAD")
 }
 
-func execCmd(commandInput ...string) {
+//Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
+func Pull() {
+	fmt.Println("Pulling from remote branch.")
+	execCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", "HEAD")
+}
+
+func execCmd(errMessage string, commandInput ...string) {
 	command := exec.Command("git", commandInput...)
 	commandOutput, err := command.Output()
 	if err != nil {
-		panic("Couldn't execute 'git " + commandInput[0] + "' command.")
+		panic(errMessage)
 	}
 	fmt.Println(string(commandOutput))
 }

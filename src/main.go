@@ -30,6 +30,8 @@ func router(commands ...string) {
 		Checkout(commands[1])
 	case "push":
 		Push()
+	case "pull":
+		Pull()
 	default:
 		fmt.Println("Couldn't find what you're searching for :(")
 	}

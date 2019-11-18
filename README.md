@@ -10,4 +10,4 @@ A command line tool to add features around git. The aim is to reduce the verbosi
 - **Checkout** : Checks out to a branch with just a substring identifier.
  Stashes the current branch and switches to the new one. 
 
-- **push** : Pushes to remote taking care of setting upstream. Just simple `push` command for the user.
+- **Push** : Pushes to remote taking care of setting upstream. Just simple `push` command for the user.
