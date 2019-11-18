@@ -1,4 +1,4 @@
-## go-git-it
+# go-git-it
 
 A command line tool to add features around git. The aim is to reduce the verbosity of common git command while making it more customizable.
 
@@ -11,3 +11,5 @@ A command line tool to add features around git. The aim is to reduce the verbosi
  Stashes the current branch and switches to the new one. 
 
 - **Push** : Pushes to remote taking care of setting upstream. Just simple `push` command for the user.
+
+- **Pull** : Pull from the remote upstream of the current branch without setting up upstream or specifying current branch name.
