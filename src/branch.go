@@ -44,5 +44,5 @@ func execCmd(commandInput ...string) {
 	if err != nil {
 		panic("Couldn't execute 'git " + commandInput[0] + "' command.")
 	}
-	fmt.Println(commandOutput)
+	fmt.Println(string(commandOutput))
 }
