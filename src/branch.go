@@ -38,6 +38,12 @@ func Checkout(branchIdentifier string) {
 	execCmd("checkout", branchName)
 }
 
+//Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
+func Push() {
+	fmt.Println("Updating current branch on remote.")
+	execCmd("push", "origin", "HEAD")
+}
+
 func execCmd(commandInput ...string) {
 	command := exec.Command("git", commandInput...)
 	commandOutput, err := command.Output()

@@ -28,6 +28,8 @@ func router(commands ...string) {
 			panic("Branch Identifier required for checkout.")
 		}
 		Checkout(commands[1])
+	case "push":
+		Push()
 	default:
 		fmt.Println("Couldn't find what you're searching for :(")
 	}
