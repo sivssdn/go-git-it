@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os/exec"
 	"strings"
 )
@@ -9,11 +10,11 @@ import (
 	Accepts [string] substring of name of any branch
 	Returns [string] first matching branch name that contains the input branch name
 */
-func AutoCompleteBranchName(name string) string {
+func autoCompleteBranchName(name string) string {
 	command := exec.Command("git", "branch", "-a")
 	commandOutput, err := command.Output()
 	if err != nil {
-		panic(err)
+		panic("Couldn't execute 'git' command.")
 	}
 	branchesArray := strings.Split(strings.Replace(string(commandOutput), "\n", " ", -1), " ")
 	for i := 1; i < len(branchesArray); i++ {
@@ -22,4 +23,26 @@ func AutoCompleteBranchName(name string) string {
 		}
 	}
 	return "Branch Not Found"
+}
+
+// Checkout changes current branch to the branch with matching name as the input identifier.
+func Checkout(branchIdentifier string) {
+	branchName := autoCompleteBranchName(branchIdentifier)
+	if branchName == "Branch Not Found" {
+		panic("Couldn't find any branch with given identifier")
+	}
+	branchName = strings.Replace(branchName, " ", "", -1)
+	fmt.Println("Stashing current branch")
+	execCmd("stash")
+	fmt.Println("Checking out to branch : ", branchName)
+	execCmd("checkout", branchName)
+}
+
+func execCmd(commandInput ...string) {
+	command := exec.Command("git", commandInput...)
+	commandOutput, err := command.Output()
+	if err != nil {
+		panic("Couldn't execute 'git " + commandInput[0] + "' command.")
+	}
+	fmt.Println(commandOutput)
 }
