@@ -26,16 +26,19 @@ func autoCompleteBranchName(name string) string {
 }
 
 // Checkout changes current branch to the branch with matching name as the input identifier.
-func Checkout(branchIdentifier string) {
-	branchName := autoCompleteBranchName(branchIdentifier)
+func Checkout(branchIdentifier ...string) {
+	branchName := autoCompleteBranchName(branchIdentifier[len(branchIdentifier)-1])
 	if branchName == "Branch Not Found" {
 		panic("Couldn't find any branch with given identifier")
 	}
 	branchName = strings.Replace(branchName, " ", "", -1)
 	fmt.Printf(TerminalColors["printColor"], "Stashing current branch")
-	execCmd("stash")
-	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : ", branchName)
-	execCmd("Couldn't execute git checkout", "checkout", branchName)
+	execCmd("Couldn't execute git stash", "stash")
+	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : ")
+	branchIdentifier[len(branchIdentifier)-1] = branchName
+	checkoutCommand := []string{"checkout"}
+	checkoutCommand = append(checkoutCommand, branchIdentifier...)
+	execCmd("Couldn't execute git checkout", checkoutCommand...)
 }
 
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
