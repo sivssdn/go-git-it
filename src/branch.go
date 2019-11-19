@@ -22,13 +22,14 @@ func autoCompleteBranchName(name string) string {
 			return branchesArray[i]
 		}
 	}
-	return "Branch Not Found"
+	return name
 }
 
 // Checkout changes current branch to the branch with matching name as the input identifier.
 func Checkout(branchIdentifier ...string) {
-	branchName := autoCompleteBranchName(branchIdentifier[len(branchIdentifier)-1])
-	if branchName == "Branch Not Found" {
+	inputBranchName := branchIdentifier[len(branchIdentifier)-1]
+	branchName := autoCompleteBranchName(inputBranchName)
+	if branchName == inputBranchName && len(branchIdentifier) == 1 {
 		panic("Couldn't find any branch with given identifier")
 	}
 	branchName = strings.Replace(branchName, " ", "", -1)
