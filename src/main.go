@@ -24,9 +24,6 @@ func main() {
 func router(commands ...string) {
 	switch CommandsAlias[commands[0]] {
 	case "checkout":
-		if len(commands) < 2 {
-			panic("Branch Identifier required for checkout.")
-		}
 		Checkout(commands[1:]...)
 	case "push":
 		Push()
