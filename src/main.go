@@ -26,10 +26,20 @@ func router(commands ...string) {
 	case "checkout":
 		Checkout(commands[1:]...)
 	case "push":
-		Push()
+		if len(commands) < 2 {
+			Push()
+			return
+		}
+		commands[0] = "push"
+		ExecCmd("Couldn't execute git push", commands...)
 	case "pull":
-		Pull()
+		if len(commands) < 2 {
+			Pull()
+			return
+		}
+		commands[0] = "pull"
+		ExecCmd("Couldn't execute git pull", commands...)
 	default:
-		fmt.Printf(TerminalColors["errorColor"], "Couldn't find what you're searching for :(\n")
+		ExecCmd("Couldn't find what you're searching for :(", commands...)
 	}
 }
