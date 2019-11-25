@@ -60,7 +60,8 @@ func Pull() {
 
 //ExecCmd executes any git command
 func ExecCmd(errMessage string, commandInput ...string) {
-	command := exec.Command("git", commandInput...)
+	commands := append(strings.Split("-c color.ui=always", " "), commandInput...)
+	command := exec.Command("git", commands...)
 	commandOutput, err := command.Output()
 	if err != nil {
 		panic(errMessage)
