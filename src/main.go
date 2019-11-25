@@ -40,6 +40,6 @@ func router(commands ...string) {
 		commands[0] = "pull"
 		ExecCmd("Couldn't execute git pull", commands...)
 	default:
-		ExecCmd("Couldn't find what you're searching for :(", commands...)
+		ExecCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }

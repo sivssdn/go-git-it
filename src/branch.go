@@ -54,7 +54,7 @@ func Push() {
 
 //Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
 func Pull() {
-	fmt.Printf(TerminalColors["printColor"], "Pulling from remote branch.\n")
+	fmt.Printf("Pulling from remote branch.\n")
 	ExecCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", "HEAD")
 }
 
@@ -65,5 +65,5 @@ func ExecCmd(errMessage string, commandInput ...string) {
 	if err != nil {
 		panic(errMessage)
 	}
-	fmt.Printf(TerminalColors["printColor"], string(commandOutput))
+	fmt.Printf(string(commandOutput))
 }

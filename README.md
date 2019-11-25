@@ -2,6 +2,12 @@
 
 A command line tool to add features around git. The aim is to reduce the verbosity of common git command while making it more customizable.
 
+### Setting up for use
+For mac users, cloning the repo and setting up an alias for the build file (already included in build folder :)) works.
+Setting up alias:
+- Open `~/.bashrc` [or ~/.zshrc depending upon your terminal]
+- Paste `alias your_preferred_program_name="/location/to/go-git-it/build/ck"`
+
 ### Features
 - **Command Alias** : Alias for common git commands can be set inside `commands.go`. A single command can have multiple aliases.
 
