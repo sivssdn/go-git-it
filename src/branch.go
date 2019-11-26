@@ -37,9 +37,9 @@ func Checkout(branchIdentifier ...string) {
 		panic("Couldn't find any branch with given identifier")
 	}
 	branchName = strings.Replace(branchName, " ", "", -1)
-	fmt.Printf(TerminalColors["printColor"], "Stashing current branch")
+	fmt.Printf(TerminalColors["printColor"], "Stashing current branch\n")
 	ExecCmd("Couldn't execute git stash", "stash")
-	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : ")
+	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : "+branchName+"\n")
 	branchIdentifier[len(branchIdentifier)-1] = branchName
 	checkoutCommand := []string{"checkout"}
 	checkoutCommand = append(checkoutCommand, branchIdentifier...)
