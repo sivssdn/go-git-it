@@ -27,10 +27,6 @@ func autoCompleteBranchName(name string) string {
 
 // Checkout changes current branch to the branch with matching name as the input identifier.
 func Checkout(branchIdentifier ...string) {
-	if len(branchIdentifier) < 1 {
-		ExecCmd("Couldn't execute git checkout", []string{"checkout"}...)
-		return
-	}
 	inputBranchName := branchIdentifier[len(branchIdentifier)-1]
 	branchName := autoCompleteBranchName(inputBranchName)
 	branchName = strings.Replace(branchName, " ", "", -1)
