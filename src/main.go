@@ -18,10 +18,10 @@ func main() {
 		fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
 		return
 	}
-	router(commandLineArgs...)
+	router(getAlias(), commandLineArgs...)
 }
 
-func router(commands ...string) {
+func router(CommandsAlias map[string]string, commands ...string) {
 	switch CommandsAlias[commands[0]] {
 	case "checkout":
 		Checkout(commands[1:]...)

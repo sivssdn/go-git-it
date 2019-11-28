@@ -1,0 +1,10 @@
+[
+    {
+        "alias":"goon",
+        "command":"checkout"
+    },
+    {
+        "alias":"p",
+        "command":"pull"
+    }
+    ]
