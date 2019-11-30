@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"path/filepath"
+	"runtime"
 )
 
 type command struct {
@@ -13,7 +14,11 @@ type command struct {
 
 func getAlias() map[string]string {
 	aliases := make(map[string]string)
-	aliasFilePath, _ := filepath.Abs("../config/alias.json")
+	_, filename, _, status := runtime.Caller(0)
+	if !status {
+		panic("Cannot read alias file.")
+	}
+	aliasFilePath, _ := filepath.Abs(filepath.Dir(filepath.Dir(filename)) + "/config/alias.json")
 	file, err := ioutil.ReadFile(aliasFilePath)
 	if err != nil {
 		panic("Cannot read alias file.")

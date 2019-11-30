@@ -9,7 +9,7 @@ Setting up alias:
 - Paste `alias your_preferred_program_name="/location/to/go-git-it/build/ck"`
 
 ### Features
-- **Command Alias** : Alias for common git commands can be set inside `commands.go`. A single command can have multiple aliases.
+- **Command Alias** : Alias for common git commands can be set inside `alias.json` inside config folder. A single command can have multiple aliases.
 
 - **Branch Name Autocomplete** : Is used in conjunction with other commands like `checkout`. Primary function is to find a branch name with a given identifier.
 
