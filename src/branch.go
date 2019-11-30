@@ -25,6 +25,16 @@ func autoCompleteBranchName(name string) string {
 	return name
 }
 
+// gets current branch name
+func getCurrentBranchName() string {
+	command := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD")
+	commandOutput, err := command.Output()
+	if err != nil {
+		panic("Cannot get current branch")
+	}
+	return string(commandOutput)
+}
+
 // Checkout changes current branch to the branch with matching name as the input identifier.
 func checkout(branchIdentifier ...string) {
 	inputBranchName := branchIdentifier[len(branchIdentifier)-1]
@@ -42,13 +52,13 @@ func checkout(branchIdentifier ...string) {
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
 func push() {
 	fmt.Printf(TerminalColors["printColor"], "Updating current branch on remote.\n")
-	execCmd("Couldn't execute git push", "push", "origin", "HEAD")
+	execCmd("Couldn't execute git push", "push", "origin", getCurrentBranchName())
 }
 
 //Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
 func pull() {
 	fmt.Printf("Pulling from remote branch.\n")
-	execCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", "HEAD")
+	execCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", getCurrentBranchName())
 }
 
 //ExecCmd executes any git command

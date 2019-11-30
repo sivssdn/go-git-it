@@ -4,8 +4,12 @@
         "command":"checkout"
     },
     {
-        "alias":"p",
+        "alias":"pl",
         "command":"pull"
+    },
+    {
+        "alias":"psh",
+        "command":"push"
     },
     {
         "alias":"s",
