@@ -18,10 +18,10 @@ func main() {
 		fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
 		return
 	}
-	router(commandLineArgs...)
+	router(getAlias(), commandLineArgs...)
 }
 
-func router(commands ...string) {
+func router(CommandsAlias map[string]string, commands ...string) {
 	switch CommandsAlias[commands[0]] {
 	case "checkout":
 		Checkout(commands[1:]...)
@@ -40,6 +40,10 @@ func router(commands ...string) {
 		commands[0] = "pull"
 		ExecCmd("Couldn't execute git pull", commands...)
 	default:
+		aliasedCommand := CommandsAlias[commands[0]]
+		if len(aliasedCommand) > 0 {
+			commands[0] = aliasedCommand
+		}
 		ExecCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }

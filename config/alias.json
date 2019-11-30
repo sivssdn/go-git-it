@@ -1,0 +1,14 @@
+[
+    {
+        "alias":"go",
+        "command":"checkout"
+    },
+    {
+        "alias":"p",
+        "command":"pull"
+    },
+    {
+        "alias":"s",
+        "command":"status"
+    }
+]
