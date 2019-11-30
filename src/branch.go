@@ -26,33 +26,33 @@ func autoCompleteBranchName(name string) string {
 }
 
 // Checkout changes current branch to the branch with matching name as the input identifier.
-func Checkout(branchIdentifier ...string) {
+func checkout(branchIdentifier ...string) {
 	inputBranchName := branchIdentifier[len(branchIdentifier)-1]
 	branchName := autoCompleteBranchName(inputBranchName)
 	branchName = strings.Replace(branchName, " ", "", -1)
 	fmt.Printf(TerminalColors["printColor"], "Stashing current branch\n")
-	ExecCmd("Couldn't execute git stash", "stash")
+	execCmd("Couldn't execute git stash", "stash")
 	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : "+branchName+"\n")
 	branchIdentifier[len(branchIdentifier)-1] = branchName
 	checkoutCommand := []string{"checkout"}
 	checkoutCommand = append(checkoutCommand, branchIdentifier...)
-	ExecCmd("Couldn't execute git checkout on the mentioned branch", checkoutCommand...)
+	execCmd("Couldn't execute git checkout on the mentioned branch", checkoutCommand...)
 }
 
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
-func Push() {
+func push() {
 	fmt.Printf(TerminalColors["printColor"], "Updating current branch on remote.\n")
-	ExecCmd("Couldn't execute git push", "push", "origin", "HEAD")
+	execCmd("Couldn't execute git push", "push", "origin", "HEAD")
 }
 
 //Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
-func Pull() {
+func pull() {
 	fmt.Printf("Pulling from remote branch.\n")
-	ExecCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", "HEAD")
+	execCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", "HEAD")
 }
 
 //ExecCmd executes any git command
-func ExecCmd(errMessage string, commandInput ...string) {
+func execCmd(errMessage string, commandInput ...string) {
 	commands := append(strings.Split("-c color.ui=always", " "), commandInput...)
 	command := exec.Command("git", commands...)
 	commandOutput, err := command.Output()
