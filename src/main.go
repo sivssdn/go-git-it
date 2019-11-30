@@ -23,7 +23,10 @@ func main() {
 
 func router(CommandsAlias map[string]string, commands ...string) {
 	aliasedCommand := CommandsAlias[commands[0]]
-	switch aliasedCommand {
+	if len(aliasedCommand) > 0 {
+		commands[0] = aliasedCommand
+	}
+	switch commands[0] {
 	case "checkout":
 		checkout(commands[1:]...)
 	case "push":
@@ -31,19 +34,14 @@ func router(CommandsAlias map[string]string, commands ...string) {
 			push()
 			return
 		}
-		commands[0] = "push"
 		execCmd("Couldn't execute git push", commands...)
 	case "pull":
 		if len(commands) < 2 {
 			pull()
 			return
 		}
-		commands[0] = "pull"
 		execCmd("Couldn't execute git pull", commands...)
 	default:
-		if len(aliasedCommand) > 0 {
-			commands[0] = aliasedCommand
-		}
 		execCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }
