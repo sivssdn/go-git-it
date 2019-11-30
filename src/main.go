@@ -40,6 +40,10 @@ func router(CommandsAlias map[string]string, commands ...string) {
 		commands[0] = "pull"
 		ExecCmd("Couldn't execute git pull", commands...)
 	default:
+		aliasedCommand := CommandsAlias[commands[0]]
+		if len(aliasedCommand) > 0 {
+			commands[0] = aliasedCommand
+		}
 		ExecCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }
