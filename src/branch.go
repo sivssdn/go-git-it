@@ -32,7 +32,7 @@ func getCurrentBranchName() string {
 	if err != nil {
 		panic("Cannot get current branch")
 	}
-	return string(commandOutput)
+	return strings.Replace(string(commandOutput), "\n", "", -1)
 }
 
 // Checkout changes current branch to the branch with matching name as the input identifier.
@@ -52,13 +52,15 @@ func checkout(branchIdentifier ...string) {
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
 func push() {
 	fmt.Printf(TerminalColors["printColor"], "Updating current branch on remote.\n")
-	execCmd("Couldn't execute git push", "push", "origin", getCurrentBranchName())
+	execCmd("Couldn't execute git push. This command", "push", "origin", getCurrentBranchName())
 }
 
 //Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
 func pull() {
+	fmt.Printf(TerminalColors["printColor"], "Stashing current branch\n")
+	execCmd("Couldn't execute git stash", "stash")
 	fmt.Printf("Pulling from remote branch.\n")
-	execCmd("Couldn't execute git pull, please check if changes are stashed on current branch", "pull", "origin", getCurrentBranchName())
+	execCmd("Couldn't execute git pull.", "pull", "origin", getCurrentBranchName())
 }
 
 //ExecCmd executes any git command
@@ -67,6 +69,7 @@ func execCmd(errMessage string, commandInput ...string) {
 	command := exec.Command("git", commands...)
 	commandOutput, err := command.Output()
 	if err != nil {
+		fmt.Println("Output from git : ", err)
 		panic(errMessage)
 	}
 	fmt.Printf(string(commandOutput))
