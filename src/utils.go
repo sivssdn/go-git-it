@@ -15,14 +15,19 @@ var TerminalColors = map[string]string{
 
 //ExecCmd executes any terminal command
 func execCmd(errMessage string, commandInput ...string) {
-	commands := append(strings.Split("-c color.ui=always", " "), commandInput...)
-	command := exec.Command("git", commands...)
+	command := exec.Command(commandInput[0], commandInput[1:]...)
 	commandOutput, err := command.Output()
 	if err != nil {
-		fmt.Println("Output from git : ", err)
+		fmt.Println("Output from terminal : ", err)
 		panic(errMessage)
 	}
 	fmt.Printf(string(commandOutput))
+}
+
+//ExecCmd executes any git command
+func execGitCmd(errMessage string, commandInput ...string){
+	commands := append(strings.Split("git -c color.ui=always", " "), commandInput...)
+	execCmd(errMessage, commands...)
 }
 
 func getRandomString(size int) string {

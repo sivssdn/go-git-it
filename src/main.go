@@ -36,16 +36,16 @@ func router(CommandsAlias map[string]string, commands ...string) {
 			push()
 			return
 		}
-		execCmd("Couldn't execute git push", commands...)
+		execGitCmd("Couldn't execute git push", commands...)
 	case "pull":
 		if len(commands) < 2 {
 			pull()
 			return
 		}
-		execCmd("Couldn't execute git pull", commands...)
+		execGitCmd("Couldn't execute git pull", commands...)
 	case "commit":
 		countCommit()
 	default:
-		execCmd("Couldn't find what you're searching for :( \n", commands...)
+		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }

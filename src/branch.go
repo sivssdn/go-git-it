@@ -41,24 +41,24 @@ func checkout(branchIdentifier ...string) {
 	branchName := autoCompleteBranchName(inputBranchName)
 	branchName = strings.Replace(branchName, " ", "", -1)
 	fmt.Printf(TerminalColors["printColor"], "Stashing current branch\n")
-	execCmd("Couldn't execute git stash", "stash")
+	execGitCmd("Couldn't execute git stash", "stash")
 	fmt.Printf(TerminalColors["printColor"], "Checking out to branch : "+branchName+"\n")
 	branchIdentifier[len(branchIdentifier)-1] = branchName
 	checkoutCommand := []string{"checkout"}
 	checkoutCommand = append(checkoutCommand, branchIdentifier...)
-	execCmd("Couldn't execute git checkout on the mentioned branch", checkoutCommand...)
+	execGitCmd("Couldn't execute git checkout on the mentioned branch", checkoutCommand...)
 }
 
 //Push updates remote with the commits on the current branch. The difference from regular push is that this function doesn't require origin to be specified.
 func push() {
 	fmt.Printf(TerminalColors["printColor"], "Updating current branch on remote.\n")
-	execCmd("Couldn't execute git push. This command", "push", "origin", getCurrentBranchName())
+	execGitCmd("Couldn't execute git push. This command", "push", "origin", getCurrentBranchName())
 }
 
 //Pull updates local branch with the contents of the remote branch without specifying origin or upstream.
 func pull() {
 	fmt.Printf(TerminalColors["printColor"], "Stashing current branch\n")
-	execCmd("Couldn't execute git stash", "stash")
+	execGitCmd("Couldn't execute git stash", "stash")
 	fmt.Printf("Pulling from remote branch.\n")
-	execCmd("Couldn't execute git pull.", "pull", "origin", getCurrentBranchName())
+	execGitCmd("Couldn't execute git pull.", "pull", "origin", getCurrentBranchName())
 }
