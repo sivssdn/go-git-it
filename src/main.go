@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-
 )
 
 func main() {
@@ -45,7 +44,7 @@ func router(CommandsAlias map[string]string, commands ...string) {
 		execGitCmd("Couldn't execute git pull", commands...)
 	case "commit":
 		vcsFolderPath := readEnvVariables()["VSC_FOLDER_PATH"].(string)
-		countCommit(vcsFolderPath)
+		countCommit(vcsFolderPath, commands)
 	default:
 		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
 	}

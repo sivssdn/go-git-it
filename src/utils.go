@@ -34,7 +34,7 @@ func execGitCmd(errMessage string, commandInput ...string){
 
 func getRandomString(size int) string {
 	rand.Seed(time.Now().Unix())
-	const letters = "abcdefghijklmnop,qrst.uvw%xyz@"
+	const letters = "abcdefghijklmnop,qrst.uvw%xyz@11"
 	randString := make([]byte, size)
 	for i := range randString{
 		randString[i] = letters[rand.Intn(len(letters))]
@@ -53,4 +53,13 @@ func writeStringToFile(text string, filePath string){
 		panic("Could not write to the specified file at "+filePath)
 	}
 	vcsfile.Sync()
+}
+
+func indexOf(stringSlice []string, searchText string) int {
+	for key, value := range stringSlice{
+		if value == searchText{
+			return key
+		}
+	}
+	return -1
 }
