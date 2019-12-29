@@ -62,15 +62,3 @@ func pull() {
 	fmt.Printf("Pulling from remote branch.\n")
 	execCmd("Couldn't execute git pull.", "pull", "origin", getCurrentBranchName())
 }
-
-//ExecCmd executes any git command
-func execCmd(errMessage string, commandInput ...string) {
-	commands := append(strings.Split("-c color.ui=always", " "), commandInput...)
-	command := exec.Command("git", commands...)
-	commandOutput, err := command.Output()
-	if err != nil {
-		fmt.Println("Output from git : ", err)
-		panic(errMessage)
-	}
-	fmt.Printf(string(commandOutput))
-}

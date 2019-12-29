@@ -18,4 +18,4 @@ Setting up alias:
 
 - **Push** : Pushes to remote taking care of setting upstream. Just simple `push` command for the user.
 
-- **Pull** : Pull from the remote upstream of the current branch without setting up upstream or specifying current branch name.
+- **Pull** : Pull from the remote upstream of the current branch without setting up upstream or specifying current branch name. Stashes the changes on local branch before pulling.

@@ -3,8 +3,9 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"path/filepath"
-	"runtime"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type command struct {
@@ -12,13 +13,9 @@ type command struct {
 	Command string `json:"command"`
 }
 
-func getAlias() map[string]string {
+//gets alias and their respective commands from (alias.json) file.
+func getAlias(aliasFilePath string) map[string]string {
 	aliases := make(map[string]string)
-	_, filename, _, status := runtime.Caller(0)
-	if !status {
-		panic("Cannot read alias file.")
-	}
-	aliasFilePath, _ := filepath.Abs(filepath.Dir(filepath.Dir(filename)) + "/config/alias.json")
 	file, err := ioutil.ReadFile(aliasFilePath)
 	if err != nil {
 		panic("Cannot read alias file.")
@@ -31,6 +28,17 @@ func getAlias() map[string]string {
 	for _, obj := range commands {
 		aliases[obj.Alias] = obj.Command
 	}
-
 	return aliases
+}
+
+//read variables from .env file in any format
+func readEnvVariables() map[string]interface{} {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic("Unable to read .env file.")
+	}
+	return map[string]interface{} {
+		"ALIAS_FILE_PATH": os.Getenv("ALIAS_FILE_PATH"),
+		"VSC_FOLDER_PATH": os.Getenv("VSC_FOLDER_PATH"),
+	}
 }
