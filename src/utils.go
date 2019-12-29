@@ -5,6 +5,8 @@ import(
 	"os/exec"
 	"strings"
 	"math/rand"
+	"os"
+	"time"
 )
 
 // TerminalColors is used for coloring terminal outputs :D
@@ -31,10 +33,24 @@ func execGitCmd(errMessage string, commandInput ...string){
 }
 
 func getRandomString(size int) string {
+	rand.Seed(time.Now().Unix())
 	const letters = "abcdefghijklmnop,qrst.uvw%xyz@"
 	randString := make([]byte, size)
 	for i := range randString{
 		randString[i] = letters[rand.Intn(len(letters))]
 	}
 	return string(randString)
+}
+
+func writeStringToFile(text string, filePath string){
+	vcsfile, err := os.Create(filePath)
+	defer vcsfile.Close()
+	if err != nil {
+		panic("Could not find file path at "+filePath)
+	}
+	_, errW := vcsfile.WriteString(text)
+	if errW != nil {
+		panic("Could not write to the specified file at "+filePath)
+	}
+	vcsfile.Sync()
 }

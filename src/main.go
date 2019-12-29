@@ -44,7 +44,8 @@ func router(CommandsAlias map[string]string, commands ...string) {
 		}
 		execGitCmd("Couldn't execute git pull", commands...)
 	case "commit":
-		countCommit()
+		vcsFolderPath := readEnvVariables()["VSC_FOLDER_PATH"].(string)
+		countCommit(vcsFolderPath)
 	default:
 		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
