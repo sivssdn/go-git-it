@@ -18,7 +18,8 @@ func main() {
 		fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
 		return
 	}
-	router(getAlias(), commandLineArgs...)
+	aliasFilePath := readEnvVariables()["ALIAS_FILE_PATH"].(string)
+	router(getAlias(aliasFilePath), commandLineArgs...)
 }
 
 func router(CommandsAlias map[string]string, commands ...string) {
@@ -34,14 +35,17 @@ func router(CommandsAlias map[string]string, commands ...string) {
 			push()
 			return
 		}
-		execCmd("Couldn't execute git push", commands...)
+		execGitCmd("Couldn't execute git push", commands...)
 	case "pull":
 		if len(commands) < 2 {
 			pull()
 			return
 		}
-		execCmd("Couldn't execute git pull", commands...)
+		execGitCmd("Couldn't execute git pull", commands...)
+	case "commit":
+		vcsFolderPath := readEnvVariables()["VSC_FOLDER_PATH"].(string)
+		countCommit(vcsFolderPath, commands)
 	default:
-		execCmd("Couldn't find what you're searching for :( \n", commands...)
+		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }
