@@ -7,6 +7,10 @@ import (
 
 //commits a change to the vcs folder of git and then proceeds to normal commit behviour in current repo
 func countCommit(vcsFolderPath string, commitCommand []string) {
+
+	//carry on with the commit on current directory
+	execGitCmd("Unable to commit changes at current folder", commitCommand...)
+
 	//changing contents of file at git repo
 	vcsFileName := "dummy-file.txt"
 	vcsFilePath := vcsFolderPath + string(os.PathSeparator) + vcsFileName
@@ -22,7 +26,4 @@ func countCommit(vcsFolderPath string, commitCommand []string) {
 	}
 	command = "--git-dir "+vcsFolderPath + string(os.PathSeparator) + ".git/ --work-tree " + vcsFolderPath + " commit -m " + strings.Replace(commitMessage, " ", "-", -1)
 	execGitCmd("Unable to commit changes at git folder", strings.Split(command, " ")...)
-
-	//carry on what the commit on current directory
-	execGitCmd("Unable to commit changes at current folder", commitCommand...)
 }

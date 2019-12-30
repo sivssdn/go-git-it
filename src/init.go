@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"runtime"
+	"path/filepath"
 
 	"github.com/joho/godotenv"
 )
@@ -33,7 +35,12 @@ func getAlias(aliasFilePath string) map[string]string {
 
 //read variables from .env file in any format
 func readEnvVariables() map[string]interface{} {
-	err := godotenv.Load(".env")
+	_, filename, _, status := runtime.Caller(0)
+	if !status {
+		panic("Unable to read .env file.")
+	}
+	envFilePath, _ := filepath.Abs(filepath.Dir(filepath.Dir(filename)) + "/src/.env")
+	err := godotenv.Load(envFilePath)
 	if err != nil {
 		panic("Unable to read .env file.")
 	}
