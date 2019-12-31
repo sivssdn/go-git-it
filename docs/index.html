@@ -1,27 +1,146 @@
 <!DOCTYPE html>
-<head>
-    <title>Go git</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Go & Git</title>
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <style>
-        html,body{
-            background-color: black;
-        }
-        .title span{
-            color: white;
-            background-color: #00ADD8;
-            font-size: 7rem;
-            padding-left: 4rem;
-            padding-right: 2rem;
-        }
+    html,body {
+        background-color: #29beb0;
+        height: 100%;
+    }
+    .section-card{
+        background-color: #000000;
+        color: #ffffff;
+        border-radius: 0;
+        min-height: 100%;
+    }
+    .full-height {
+        min-height: 100%;
+    }
+    .section-header-container{
+        margin-top: 20%;
+        border-top: 1px solid #ffffff;
+        border-bottom: 1px solid #ffffff;
+        text-align: center;
+    }
+    .section-header, .section-header-2{
+        font-size: 9rem;
+    }
+    .section-header-sub {
+        font-size: 2rem;
+    }
+    .white-text, .heading {
+        color: #ffffff;
+    }
+    .heading{
+        background-color: #000000;
+    }
+    .heading:hover{
+        cursor: default !important;
+    }
+    .hide{
+        display: none;
+    }
     </style>
-</head>
-<body>
-    <main>
-        <div class="row">
-            <div class="col m5 l5 s12 red valign-wrapper">
-                <div class="title"><span>Go & Git</span></h1>
+  </head>
+  <body>
+    <div class="row full-height">
+        <div class="col-sm-6">
+          <div class="card section-card">
+            <div class="card-body">
+              <div class="card-text section-header-container animated slideInLeft">
+                  <span class="section-header">Go</span>
+                  <span class="section-header-sub">&</span>
+                  <span class="section-header-2">Git</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card-body">
+              <p class="card-text">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 animated slideInRight">
+                        <a class="navbar-brand" href="#">MENU</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-2" aria-controls="navbarNavDropdown-2" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown-2">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="home animated slideInUp">
+                            <span class="btn btn-outline-dark btn-pill heading">About</span> <br />
+                            <p class="white-text">
+                                Go Git is a CLI tool aiming to reduce the verbosity of common git command while making it more customizable.
+                            </p>
+                            <span class="btn btn-outline-dark btn-pill heading">How to Set Up</span> <br />
+                            <p>
+                                <ul class="white-text">
+                                    <li>Download the go-git-it repo from <a href="https://github.com/sivssdn/go-git-it/archive/master.zip">here</a>.
+                                    <li>After extracting, rename .env-example to .env (inside src folder).</li>
+                                    <li>"git init" inside a new folder and copy it’s absolute path.</li>
+                                    <li>Paste the path of the folder in .env as "VSC_FOLDER_PATH".</li>
+                                    <li>Set an alias inside .bashrc or .zshrc as: <br />alias your_preferred_program_name="/location/to/go-git-it/build/main"</li>
+                                </ul>
+                            </p>
+                            <span class="btn btn-outline-dark btn-pill heading">How to build</span> <br />
+                            <p class="white-text">
+                                <p class="white-text">
+                                    Any Go dev is welcome to make any change as per their liking.<br />
+                                    To build the project as it is: <br />
+                                    <ul class="white-text">
+                                        <li>cd into the "src" folder of the project</li>
+                                        <li>Run "go build -o ../build/main". This makes your new build as main inside folder build.</li>
+                                    </ul>
+                                </p>
+                            </p>
+                        </div>
+                        <div class="features hide animated fadeIn">
+                            <span class="btn btn-outline-dark btn-pill heading">Feature Highlights</span> <br />
+                            <p>
+                                    <ul class="white-text">
+                                        <li>Showing Bitbucket commits on Git's contribution map.</li>
+                                        <li>Setting up custom command aliases. E.g., git checkout could be gt chk or anything you want to call your command.</li>
+                                        <li>Auto completing branch name on git checkout.</li>
+                                        <li>And many more like, simple push or pull doing "git pull origin your-current-branch-name"</li>
+                                    </ul>
+                                    <br />
+                                <p class="white-text">
+                                    No limit on setting up command aliases on git commands. Personalize it to the extent you wish. <br />
+                                    Github link : <a href="https://github.com/sivssdn/go-git-it">go-git-it</a>
+                                </p>    
+                            </p>
+                        </div>
+                </p>
             </div>
         </div>
-    </main>
-</body>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- JavaScript Dependencies: jQuery, Popper.js, Bootstrap JS, Shards JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+    <script>
+        let tabs = ["home", "features"];
+        $(".home").parent("li").addClass("active");
+        $(".nav-link").click(function(){
+            tabs.map(tab => {
+                $(`.${tab}`).addClass("hide fadeIn");
+                $(`.${tab}`).removeClass("slideInUp");
+            });
+            $(".nav-item").removeClass("active");
+            $(`.${$(this).text().split(" ")[0].toLowerCase()}`).removeClass("hide");
+            $(`.${$(this).text().split(" ")[0].toLowerCase()}`).parent("li").addClass("active");
+        });
+    </script>
+  </body>
 </html>
