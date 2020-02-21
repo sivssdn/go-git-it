@@ -1,11 +1,11 @@
 package main
 
-import(
+import (
 	"fmt"
-	"os/exec"
-	"strings"
 	"math/rand"
 	"os"
+	"os/exec"
+	"strings"
 	"time"
 )
 
@@ -27,7 +27,7 @@ func execCmd(errMessage string, commandInput ...string) {
 }
 
 //ExecCmd executes any git command
-func execGitCmd(errMessage string, commandInput ...string){
+func execGitCmd(errMessage string, commandInput ...string) {
 	commands := append(strings.Split("git -c color.ui=always", " "), commandInput...)
 	execCmd(errMessage, commands...)
 }
@@ -36,30 +36,40 @@ func getRandomString(size int) string {
 	rand.Seed(time.Now().Unix())
 	const letters = "abcdefghijklmnop,qrst.uvw%xyz@11"
 	randString := make([]byte, size)
-	for i := range randString{
+	for i := range randString {
 		randString[i] = letters[rand.Intn(len(letters))]
 	}
 	return string(randString)
 }
 
-func writeStringToFile(text string, filePath string){
+func writeStringToFile(text string, filePath string) {
 	vcsfile, err := os.Create(filePath)
 	defer vcsfile.Close()
 	if err != nil {
-		panic("Could not find file path at "+filePath)
+		panic("Could not find file path at " + filePath)
 	}
 	_, errW := vcsfile.WriteString(text)
 	if errW != nil {
-		panic("Could not write to the specified file at "+filePath)
+		panic("Could not write to the specified file at " + filePath)
 	}
 	vcsfile.Sync()
 }
 
 func indexOf(stringSlice []string, searchText string) int {
-	for key, value := range stringSlice{
-		if value == searchText{
+	for key, value := range stringSlice {
+		if value == searchText {
 			return key
 		}
 	}
 	return -1
+}
+
+func getMaxLength(slice []string) int {
+	maxLen := 0
+	for _, value := range slice {
+		if len(value) > maxLen {
+			maxLen = len(value)
+		}
+	}
+	return maxLen
 }
