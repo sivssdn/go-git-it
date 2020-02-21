@@ -18,7 +18,7 @@ func autoCompleteBranchName(name string) string {
 	}
 	branchesArray := strings.Split(strings.Replace(string(commandOutput), "\n", " ", -1), " ")
 	for i := 1; i < len(branchesArray); i++ {
-		if strings.Contains(branchesArray[i], name) {
+		if strings.Contains(strings.ToLower(branchesArray[i]), strings.ToLower(name)) {
 			return branchesArray[i]
 		}
 	}
