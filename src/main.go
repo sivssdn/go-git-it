@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -11,16 +12,13 @@ func main() {
 		}
 	}()
 	//reading command line args
-	// commandLineArgs := os.Args[1:]
-	// if len(commandLineArgs) < 1 {
-	// 	fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
-	// 	return
-	// }
+	commandLineArgs := os.Args[1:]
+	if len(commandLineArgs) < 1 {
+		fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
+		return
+	}
 	aliasFilePath := readEnvVariables()["ALIAS_FILE_PATH"].(string)
-	// router(getAlias(aliasFilePath), commandLineArgs...)
-	//============
-	printAliases(getAlias(aliasFilePath))
-	//============
+	router(getAlias(aliasFilePath), commandLineArgs...)
 }
 
 func router(CommandsAlias map[string]string, commands ...string) {
@@ -46,6 +44,8 @@ func router(CommandsAlias map[string]string, commands ...string) {
 	case "commit":
 		vcsFolderPath := readEnvVariables()["VSC_FOLDER_PATH"].(string)
 		countCommit(vcsFolderPath, commands)
+	case "names":
+		printAliases(CommandsAlias)
 	default:
 		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
 	}

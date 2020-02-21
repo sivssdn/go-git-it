@@ -15,12 +15,12 @@ func printAliases(commandsAlias map[string]string) {
 	padding := 0
 	paddingStart := strings.Join(make([]string, 4), " ")
 	var aliasRow string
-	fmt.Printf(TerminalColors["printColor"], " Nick Names [Alias:Command] - \n\n")
-	//printing the table
+	fmt.Printf(TerminalColors["printColor"], "\n Nick Names [Alias:Command] - \n\n")
+	//formatting & printing the table
 	for alias := range commandsAlias {
 		padding = maxAliasLen - len(alias)
 		aliasRow = paddingStart + alias + strings.Join(make([]string, padding), " ") + " : " + commandsAlias[alias] + "\n"
 		fmt.Printf(TerminalColors["printColor"], aliasRow)
 	}
-	fmt.Println()
+	fmt.Println("\nYou can always add more in alias.json")
 }
