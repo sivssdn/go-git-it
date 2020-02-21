@@ -22,7 +22,7 @@ Every time you commit using go-git-it, your dummy-repo is updated with the lates
 
 - **Command Alias** : Alias for common git commands can be set with `alias.json` inside config folder. A single command can have multiple aliases.
 
-- **Branch Name Autocomplete** : Is used in conjunction with other commands like `checkout`. Primary function is to find a branch name with a given identifier.
+- **Branch Name Autocomplete** : Is used in conjunction with other commands like `checkout`. Primary function is to find a branch name with a given identifier. Auto-complete is case in-sensitive.
 
 - **Checkout** : Checks out to a branch with just a substring identifier.
  Stashes the current branch and switches to the new one. 

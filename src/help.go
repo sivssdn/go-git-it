@@ -1,16 +1,26 @@
 package main
 
 import (
-	"reflect"
+	"fmt"
+	"strings"
 )
 
 //PrintAliases prints table to display all user defined aliases with their corresponding commands
 func printAliases(commandsAlias map[string]string) {
-	aliases := reflect.ValueOf(commandsAlias).MapKeys()
-	maxAliasLen, maxCommandLen := 0, 0
-	for _, value := range commandsAlias {
-		if len(value) > maxCommandLen {
-			maxCommandLen = len(value)
-		}
+	aliases := []string{}
+	for alias := range commandsAlias {
+		aliases = append(aliases, alias)
 	}
+	maxAliasLen := getMaxLength(aliases) + 2
+	padding := 0
+	paddingStart := strings.Join(make([]string, 4), " ")
+	var aliasRow string
+	fmt.Printf(TerminalColors["printColor"], " Nick Names [Alias:Command] - \n\n")
+	//printing the table
+	for alias := range commandsAlias {
+		padding = maxAliasLen - len(alias)
+		aliasRow = paddingStart + alias + strings.Join(make([]string, padding), " ") + " : " + commandsAlias[alias] + "\n"
+		fmt.Printf(TerminalColors["printColor"], aliasRow)
+	}
+	fmt.Println()
 }

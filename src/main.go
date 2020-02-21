@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
@@ -11,15 +10,17 @@ func main() {
 			fmt.Printf(TerminalColors["errorColor"], err)
 		}
 	}()
-
 	//reading command line args
-	commandLineArgs := os.Args[1:]
-	if len(commandLineArgs) < 1 {
-		fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
-		return
-	}
+	// commandLineArgs := os.Args[1:]
+	// if len(commandLineArgs) < 1 {
+	// 	fmt.Printf(TerminalColors["printColor"], "Please enter command after program name. \nE.g., "+os.Args[0]+" command_name\n")
+	// 	return
+	// }
 	aliasFilePath := readEnvVariables()["ALIAS_FILE_PATH"].(string)
-	router(getAlias(aliasFilePath), commandLineArgs...)
+	// router(getAlias(aliasFilePath), commandLineArgs...)
+	//============
+	printAliases(getAlias(aliasFilePath))
+	//============
 }
 
 func router(CommandsAlias map[string]string, commands ...string) {
