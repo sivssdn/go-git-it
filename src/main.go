@@ -47,6 +47,6 @@ func router(CommandsAlias map[string]string, commands ...string) {
 	case "names":
 		printAliases(CommandsAlias)
 	default:
-		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
+		execDefaultCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }

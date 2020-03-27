@@ -26,6 +26,16 @@ func execCmd(errMessage string, commandInput ...string) {
 	fmt.Printf(string(commandOutput))
 }
 
+//Executes commands withou a route in main file
+func execDefaultCmd(errMessage string, commandInput ...string) {
+	var commands []string
+	//to account for commands aliased with multiple keywords. E.g., all => add --all
+	for _, cmd := range commandInput {
+		commands = append(commands, strings.Split(cmd, " ")...)
+	}
+	execGitCmd(errMessage, commands...)
+}
+
 //ExecCmd executes any git command
 func execGitCmd(errMessage string, commandInput ...string) {
 	commands := append(strings.Split("git -c color.ui=always", " "), commandInput...)
