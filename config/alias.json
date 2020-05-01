@@ -1,22 +1,26 @@
 [
     {
-        "alias":"go",
-        "command":"checkout"
+        "alias": "go",
+        "command": "checkout"
     },
     {
-        "alias":"pl",
-        "command":"pl"
+        "alias": "pl",
+        "command": "pl"
     },
     {
-        "alias":"psh",
-        "command":"push"
+        "alias": "psh",
+        "command": "push"
     },
     {
-        "alias":"s",
-        "command":"status"
+        "alias": "s",
+        "command": "status"
     },
     {
-        "alias":"b",
-        "command":"branch"
+        "alias": "b",
+        "command": "branch"
+    },
+    {
+        "alias": "all",
+        "command": "add --all"
     }
 ]

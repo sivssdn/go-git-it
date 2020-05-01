@@ -11,7 +11,6 @@ func main() {
 			fmt.Printf(TerminalColors["errorColor"], err)
 		}
 	}()
-
 	//reading command line args
 	commandLineArgs := os.Args[1:]
 	if len(commandLineArgs) < 1 {
@@ -45,7 +44,9 @@ func router(CommandsAlias map[string]string, commands ...string) {
 	case "commit":
 		vcsFolderPath := readEnvVariables()["VSC_FOLDER_PATH"].(string)
 		countCommit(vcsFolderPath, commands)
+	case "names":
+		printAliases(CommandsAlias)
 	default:
-		execGitCmd("Couldn't find what you're searching for :( \n", commands...)
+		execDefaultCmd("Couldn't find what you're searching for :( \n", commands...)
 	}
 }
